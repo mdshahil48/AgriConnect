@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign In | AgriConnect{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth_pages.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-page-wrapper">
+
+  <!-- ===== Left: Visual Hero Panel ===== -->
+  <div class="auth-visual-panel">
+    <div class="hero-bg">
+      <img src="{% static 'images/auth_farm_hero.jpg' %}" alt="Indian farmland at sunrise">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="auth-visual-content">
+      <div class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div>
+          <span class="logo-text">AgriConnect</span>
+          <span class="logo-sub">कृषि सेतु • Direct Farm</span>
+        </div>
+      </div>
+      <h1>Bridging <span class="accent">Farms</span> to Families</h1>
+      <p class="hero-desc">
+        A transparent supply chain connecting Jharkhand's tribal farmers directly to your kitchen — 
+        zero middlemen, fair prices, fresh produce.
+      </p>
+      <div class="auth-stat-chips">
+        <span class="auth-stat-chip">
+          <i class="fa-solid fa-users"></i> 2,400+ Farmers
+        </span>
+        <span class="auth-stat-chip">
+          <i class="fa-solid fa-truck-fast"></i> 18-Hour Delivery
+        </span>
+        <span class="auth-stat-chip">
+          <i class="fa-solid fa-hand-holding-heart"></i> 40% More Income
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Right: Login Form Panel ===== -->
+  <div class="auth-form-panel">
+    <div class="auth-glass-card">
+
+      <div class="auth-card-header">
+        <div class="header-icon">
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Sign in to your role-based dashboard</p>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="auth-field-group">
+          <label for="id_username">Username or Phone</label>
+          {{ form.username }}
+        </div>
+
+        <div class="auth-field-group">
+          <label for="id_password">Password</label>
+          <div class="password-field-wrap">
+            {{ form.password }}
+            <button type="button" class="toggle-pass" onclick="togglePasswordVisibility(this)" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="auth-submit-btn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          Sign In to Account
+        </button>
+      </form>
+
+      <div class="auth-alt-link">
+        Don't have an account? <a href="{% url 'register' %}">Create one now</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function togglePasswordVisibility(btn) {
+  const input = btn.previousElementSibling;
+  const icon = btn.querySelector('i');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.classList.replace('fa-eye', 'fa-eye-slash');
+  } else {
+    input.type = 'password';
+    icon.classList.replace('fa-eye-slash', 'fa-eye');
+  }
+}
+</script>
+{% endblock %}
