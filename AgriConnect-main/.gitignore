@@ -80,3 +80,6 @@ cover/
 Thumbs.db
 desktop.ini
 *.pptx
+
+*.backup
+media-backup.zip
